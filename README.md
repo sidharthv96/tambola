@@ -25,6 +25,7 @@ The list of `environment:` variables in the `docker-compose.yml` file takes prec
 To run any commands using the `Flask CLI`
 
 ```bash
+cp .env.example .env
 docker-compose run --rm manage <<COMMAND>>
 ```
 
