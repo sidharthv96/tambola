@@ -42,13 +42,6 @@ def game_random_number():
     return rand
 
 
-@blueprint.route("/numbers/")
-@login_required
-def game_all_numbers():
-    game = get_game()
-    return game.numbers
-
-
 @blueprint.route("/new/")
 @login_required
 def game_inc():
