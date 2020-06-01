@@ -1,29 +1,18 @@
 const winPatterns = [
   {
-    'name': 'Full House',
-    'validator': fullHouseValidator
-  }, 
-  {
-    'name': 'Top Row',
-    'validator': topRowValidator
+    name: 'Full House',
+    validator: (t) =>
+      !t.data.flat().some((cell) => cell !== '-' && cell !== 'x'),
   },
   {
-    'name': 'Early 5',
-    'validator': earlyValidator
-  }
+    name: 'Top Row',
+    validator: (t) => !t.data[0].some((cell) => cell !== '-' && cell !== 'x'),
+  },
+  {
+    name: 'Early 5',
+    validator: (t) => t.data.flat().filter((cell) => cell === 'x').length >= 5,
+  },
 ];
-
-function fullHouseValidator(ticket) {
-  return !ticket.data.flat().some((item) => item !== '-' && item !== 'x');
-}
-
-function topRowValidator(ticket) {
-  return !ticket.data[0].some((item) => item !== '-' && item !== 'x');  
-}
-
-function earlyValidator(ticket) {
-  return ticket.data.flat().filter(item => item === "x").length >= 5;
-}
 
 showWinners();
 
