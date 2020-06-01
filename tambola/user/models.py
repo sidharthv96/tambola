@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """User models."""
 import datetime as dt
+from dataclasses import dataclass
 
 from flask_login import UserMixin
 
@@ -71,12 +72,16 @@ class User(UserMixin, SurrogatePK, Model):
         """Represent instance as a unique string."""
         return f"<User({self.username!r})>"
 
+@dataclass
 class Ticket(SurrogatePK, Model):
+    name: str
+    game: str
+    data: str
     """A ticket for a game."""
 
     __tablename__ = "ticket"
     name = Column(db.String(80), unique=True, nullable=False)
-    game = Column(db.Integer(), nullable=False)
+    game = Column(db.String(10), nullable=False)
     data = Column(db.String(300), nullable=False)
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -84,4 +89,23 @@ class Ticket(SurrogatePK, Model):
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return f"<Ticket({self.name})>"
+        return f"<Ticket({self.name},game={self.game})>"
+
+
+class Config(SurrogatePK, Model):
+    """Configs for server"""
+
+    __tablename__ = "config"
+    name = Column(db.String(80), unique=True, nullable=False)
+    value = Column(db.String(80), nullable=False)
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return f"<Config({self.name}={self.value})>"
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()

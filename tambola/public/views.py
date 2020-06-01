@@ -8,15 +8,17 @@ from flask import (
     render_template,
     request,
     url_for,
+    json
 )
 from flask_login import login_required, login_user, logout_user
 
 from tambola.extensions import login_manager
 from tambola.public.forms import LoginForm
-from tambola.public.util import Generator
+from tambola.public.util import Generator, get_name
 from tambola.user.forms import RegisterForm
-from tambola.user.models import User
+from tambola.user.models import User, Ticket, Config
 from tambola.utils import flash_errors
+import random
 
 blueprint = Blueprint("public", __name__, static_folder="../static")
 
@@ -71,7 +73,45 @@ def register():
     return render_template("public/register.html", form=form)
 
 
+@blueprint.route("/tickets/")
+@login_required
+def tickets():
+    return json.jsonify(Ticket.query.filter_by(game=request.args.get('game', '1')).all())
+    
+
 @blueprint.route("/play/")
 def play():
     """Play page."""
-    return render_template("public/play.html", card=Generator().get_ticket())
+    
+    return render_template("public/play.html", card=Ticket.create(
+        name=get_name(),
+        game=get_game().value,
+        data=json.dumps(Generator().get_ticket())
+    ))
+
+
+@blueprint.route("/game/")
+def game():
+    """set game."""
+    game = get_game()
+    return game.value
+
+
+@blueprint.route("/game/new")
+@login_required
+def game_inc():
+    """new game."""
+    game = get_game()
+    game.value = str(int(game.value) + 1)
+    game.save()
+    return game.value
+
+
+def get_game():
+    game = Config.get_by_name(name="game.name")
+    if not game:
+        game = Config.create(
+            name="game.name",
+            value="1"
+        )
+    return game

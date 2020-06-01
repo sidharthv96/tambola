@@ -9,7 +9,7 @@
     </div>
 </div>
 <script>
-  let data = {{card|tojson}};
+  let data = {{card.data|safe}};
   console.log(data);
 </script>
 {% endblock %}
