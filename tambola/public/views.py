@@ -13,6 +13,7 @@ from flask_login import login_required, login_user, logout_user
 
 from tambola.extensions import login_manager
 from tambola.public.forms import LoginForm
+from tambola.public.util import Ticket
 from tambola.user.forms import RegisterForm
 from tambola.user.models import User
 from tambola.utils import flash_errors
@@ -73,4 +74,4 @@ def register():
 @blueprint.route("/play/")
 def play():
     """Play page."""
-    return render_template("public/play.html", card={0,1,2})
+    return render_template("public/play.html", card=Ticket().get_ticket())
