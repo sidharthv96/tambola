@@ -24,7 +24,8 @@ async function showWinners() {
   const rootDiv = document.getElementById('win_patterns');
   rootDiv.innerHTML = '';
   winPatterns.forEach((pattern) => {
-    rootDiv.innerHTML += `<div>
+    rootDiv.innerHTML += `
+    <div>
       <h3>${pattern.name}</h3>
       <ul>
       ${markedTickets
