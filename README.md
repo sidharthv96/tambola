@@ -2,6 +2,10 @@
 
 A flasky app.
 
+```bash
+cp .env.example .env
+```
+
 ## Docker Quickstart
 
 This app can be run completely using `Docker` and `docker-compose`. **Using Docker is recommended, as it guarantees the application is run using compatible versions of Python and Node**.
@@ -25,7 +29,6 @@ The list of `environment:` variables in the `docker-compose.yml` file takes prec
 To run any commands using the `Flask CLI`
 
 ```bash
-cp .env.example .env
 docker-compose run --rm manage <<COMMAND>>
 ```
 
