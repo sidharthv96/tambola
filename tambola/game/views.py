@@ -2,19 +2,14 @@
 """User views."""
 from flask import (
     Blueprint,
-    current_app,
-    flash,
-    redirect,
     render_template,
     make_response,
     request,
-    url_for,
     json
 )
 from flask_login import login_required
 from tambola.public.util import Generator, get_name
 from tambola.game.models import Ticket, Game
-from tambola.utils import flash_errors
 import random
 blueprint = Blueprint("game", __name__, url_prefix="/games", static_folder="../static")
 

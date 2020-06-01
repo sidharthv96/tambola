@@ -21,6 +21,8 @@ services:
     ports:
       - "5000:5000"
       - "2992:2992"
+    depends_on: 
+      - db
     <<: *default_volumes
 
   flask-prod:
@@ -37,6 +39,8 @@ services:
       FLASK_DEBUG: 0
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
+    depends_on: 
+      - db
     <<: *default_volumes
 
   manage:
@@ -49,9 +53,21 @@ services:
     image: "tambola-manage"
     stdin_open: true
     tty: true
+    depends_on: 
+      - db
     <<: *default_volumes
 
+  db:
+    image: postgres:12-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=tambola
+      - POSTGRES_PASSWORD=tambola
+      - POSTGRES_DB=tambola
+
 volumes:
+  postgres_data:
   node-modules:
   static-build:
   dev-db:
