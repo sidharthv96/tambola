@@ -2,7 +2,7 @@ import random,getopt
 import sys
 
 # Source: https://github.com/pradeep1288/tambola.py
-class Ticket:
+class Generator:
     def __init__(self):
         self.total_tickets = 1
         self.row = 3
@@ -191,6 +191,5 @@ class Ticket:
         for j in range(0,9):
             if row3_elim[j] == 1:
                 data[2][j] = "-"
-        print(data)
         return data
         

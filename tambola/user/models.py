@@ -70,3 +70,18 @@ class User(UserMixin, SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return f"<User({self.username!r})>"
+
+class Ticket(SurrogatePK, Model):
+    """A ticket for a game."""
+
+    __tablename__ = "ticket"
+    name = Column(db.String(80), unique=True, nullable=False)
+    game = Column(db.Integer(), nullable=False)
+    data = Column(db.String(300), nullable=False)
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return f"<Ticket({self.name})>"
