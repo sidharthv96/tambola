@@ -70,8 +70,7 @@ def register():
     return render_template("public/register.html", form=form)
 
 
-@blueprint.route("/about/")
-def about():
-    """About page."""
-    form = LoginForm(request.form)
-    return render_template("public/about.html", form=form)
+@blueprint.route("/play/")
+def play():
+    """Play page."""
+    return render_template("public/play.html", card={0,1,2})
