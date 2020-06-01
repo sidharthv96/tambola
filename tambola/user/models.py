@@ -16,23 +16,6 @@ from tambola.database import (
 from tambola.extensions import bcrypt
 
 
-class Role(SurrogatePK, Model):
-    """A role for a user."""
-
-    __tablename__ = "roles"
-    name = Column(db.String(80), unique=True, nullable=False)
-    user_id = reference_col("users", nullable=True)
-    user = relationship("User", backref="roles")
-
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return f"<Role({self.name})>"
-
-
 class User(UserMixin, SurrogatePK, Model):
     """A user of the app."""
 
@@ -71,26 +54,6 @@ class User(UserMixin, SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return f"<User({self.username!r})>"
-
-@dataclass
-class Ticket(SurrogatePK, Model):
-    name: str
-    game: str
-    data: str
-    """A ticket for a game."""
-
-    __tablename__ = "ticket"
-    name = Column(db.String(80), unique=True, nullable=False)
-    game = Column(db.String(10), nullable=False)
-    data = Column(db.String(300), nullable=False)
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return f"<Ticket({self.name},game={self.game})>"
-
 
 class Config(SurrogatePK, Model):
     """Configs for server"""
