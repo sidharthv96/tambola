@@ -67,9 +67,9 @@ def tickets():
 @blueprint.route("/play/")
 def play():
     """Play page."""
-    
-    return render_template("public/play.html", card=Ticket.create(
+    card=Ticket.create(
         name=get_name(),
         game=get_game().id,
         data=json.dumps(Generator().get_ticket())
-    ))
+    )
+    return render_template("public/play.html", card=card, data=json.loads(card.data))
