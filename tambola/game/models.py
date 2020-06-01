@@ -43,3 +43,7 @@ class Ticket(SurrogatePK, Model):
         """Represent instance as a unique string."""
         return f"<Ticket({self.name},game={self.game})>"
 
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
+

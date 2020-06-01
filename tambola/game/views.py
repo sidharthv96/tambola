@@ -6,6 +6,7 @@ from flask import (
     flash,
     redirect,
     render_template,
+    make_response,
     request,
     url_for,
     json
@@ -67,9 +68,21 @@ def tickets():
 @blueprint.route("/play/")
 def play():
     """Play page."""
-    
-    return render_template("public/play.html", card=Ticket.create(
-        name=get_name(),
-        game=get_game().id,
-        data=json.dumps(Generator().get_ticket())
-    ))
+
+    ticket_name = request.cookies.get('ticket_name')
+    ticket = None
+    game = get_game()
+    new_ticket = True
+
+    if ticket_name:
+        ticket = Ticket.get_by_name(ticket_name)
+        new_ticket = ticket.game != game.id
+    if new_ticket:
+        ticket = Ticket.create(
+            name=get_name(),
+            game=game.id,
+            data=json.dumps(Generator().get_ticket())
+        )
+    resp = make_response(render_template("public/play.html", card=ticket))
+    resp.set_cookie('ticket_name', ticket.name)
+    return resp
