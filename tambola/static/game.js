@@ -14,9 +14,7 @@ const winPatterns = [
 ];
 
 function fullHouseValidator(ticket) {
-  return !ticket.data.some((row) =>
-    row.some((item) => item !== '-' && item !== 'x')
-  );
+  return !ticket.data.flat().some((item) => item !== '-' && item !== 'x');
 }
 
 function topRowValidator(ticket) {
