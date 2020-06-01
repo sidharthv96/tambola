@@ -76,7 +76,7 @@ def play():
 
     if ticket_name:
         ticket = Ticket.get_by_name(ticket_name)
-        new_ticket = ticket.game != game.id
+        new_ticket = ticket and ticket.game != game.id
     if new_ticket:
         ticket = Ticket.create(
             name=get_name(),
