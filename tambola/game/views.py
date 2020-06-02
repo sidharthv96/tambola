@@ -77,6 +77,6 @@ def play():
             game=game.id,
             data=json.dumps(Generator().get_ticket())
         )
-    resp = make_response(render_template("public/play.html", card=ticket))
+    resp = make_response(render_template("public/play.html", card=ticket, data=json.loads(ticket.data)))
     resp.set_cookie('ticket_name', ticket.name)
     return resp

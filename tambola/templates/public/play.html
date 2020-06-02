@@ -2,15 +2,69 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<style>
+  table{
+    outline: 10px solid rgb(252,252,252);
+    border: 2px solid rgb(62, 131, 196);
+    border-collapse: collapse;
+    box-shadow: 0 0 0 20px rgb(62, 131, 196),
+                16px 24px 30px #888888;
+    width: 100vw;
+    margin: 5vw;
+  }
+  th, td {
+    border: 2px solid rgb(62, 131, 196);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    text-align: center;
+  }
+  td[data-type=empty] {
+    background: rgb(62, 131, 196);
+  }
+  td[data-selected=true] {
+    background: #8BC34A;
+  }
+  div[class=row] {
+    margin: 2em;
+  }
+  b[class=number] {
+    font-weight: bold;
+    color: rgb(45, 91, 134);
+  }
+</style>
+
 <div class="container">
-    <h1 class="mt-5">About</h1>
+    <h1 class="mt-5" style="text-align: center;">Let's Play</h1>
     <div class="row">
-      {{card}}
+      <b>Your ID: {{card.name}}</b>
+    </div>
+    <div class="row">
+      <table>
+        <tbody>
+          {% for row in data %}
+            <tr>
+            {% for col in row %}
+              {% if col == "-" %}
+                <td data-type=empty> &nbsp; </td>
+              {% else %}
+                <td id="{{col}}" style="width: 10%;" data-selected=false onclick="tileClicked('{{col}}')"> <b class="number"> {{col}} </b> </td>
+              {% endif %}
+            {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 </div>
+
 <script>
-  let data = {{card.data|safe}};
-  console.log(data);
+
+  function tileClicked(cellId){
+    let cell = document.getElementById(cellId);
+    let selected = cell.dataset.selected=="true" ? true : false;
+    cell.setAttribute("data-selected", !selected);
+  }
+
 </script>
 {% endblock %}
 
