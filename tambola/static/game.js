@@ -16,6 +16,17 @@ const winPatterns = [
 
 showWinners();
 
+async function nextNumber() {
+  await fetch("/games/random/");
+  location.reload();
+}
+
+async function newGame() {
+  if (confirm("Start new game?")) {
+    await fetch('/games/new/');
+    location.reload();
+  }
+}
 async function showWinners() {
   const tickets = await getTickets();
   const markedNums = await getMarkedNums();

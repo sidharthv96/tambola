@@ -28,8 +28,13 @@ def load_user(user_id):
     return User.get_by_id(int(user_id))
 
 
-@blueprint.route("/", methods=["GET", "POST"])
+@blueprint.route("/")
 def home():
+    return redirect(url_for('game.play'))
+
+
+@blueprint.route("/login/", methods=["GET", "POST"])
+def login():
     """Home page."""
     form = LoginForm(request.form)
     current_app.logger.info("Hello from the home page!")
@@ -38,7 +43,7 @@ def home():
         if form.validate_on_submit():
             login_user(form.user)
             flash("You are logged in.", "success")
-            redirect_url = request.args.get("next") or url_for("user.members")
+            redirect_url = request.args.get("next") or url_for("game.manage")
             return redirect(redirect_url)
         else:
             flash_errors(form)

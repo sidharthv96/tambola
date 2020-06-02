@@ -1,0 +1,19 @@
+
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+
+        <h1>Game {{game.id}}</h1>
+        <button type="button" class="btn btn-primary" onclick="nextNumber()">Generate</button>
+        <button type="button" class="btn btn-primary" onclick="newGame()">New Game</button>
+        {{game.numbers}}
+    </div>
+    <div class="col-md-4">
+        <div id="win_patterns"></div>
+    </div>
+</div>
+<script src="{{url_for('static', filename='game.js')}}"></script>
+{% endblock %}
+
