@@ -10,6 +10,7 @@
     box-shadow: 0 0 0 20px rgb(62, 131, 196),
                 16px 24px 30px #888888;
     width: 100vw;
+    margin: 5vw;
   }
   th, td {
     border: 2px solid rgb(62, 131, 196);
@@ -46,7 +47,7 @@
               {% if col == "-" %}
                 <td data-type=empty> &nbsp; </td>
               {% else %}
-                <td id="{{col}}" data-selected=false onclick="tileClicked('{{col}}')"> <b class="number"> {{col}} </b> </td>
+                <td id="{{col}}" style="width: 10%;" data-selected=false onclick="tileClicked('{{col}}')"> <b class="number"> {{col}} </b> </td>
               {% endif %}
             {% endfor %}
             </tr>
