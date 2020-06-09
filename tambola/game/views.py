@@ -18,20 +18,25 @@ blueprint = Blueprint("game", __name__, url_prefix="/games", static_folder="../s
 def game():
     return json.jsonify(get_game())
 
+@blueprint.route("/manage/")
+@login_required
+def manage():
+    return render_template("public/manage.html", game=get_game())
+
 possible = set(map(str,range(1, 91)))
 
 @blueprint.route("/random/")
 @login_required
 def game_random_number():
     game = get_game()
-    numbers = set()
+    numbers = list()
     if len(game.numbers) > 1:
-        numbers = set(game.numbers.split(","))
-    choices = list(possible - numbers)
+        numbers = game.numbers.split(",")
+    choices = [item for item in possible if item not in numbers]
     if len(choices) == 0:
         return "Game Over"
     rand = random.choice(choices)
-    numbers.add(rand)
+    numbers.insert(0, rand)
     game.numbers = ",".join(numbers)
     game.save()
     return str(rand)

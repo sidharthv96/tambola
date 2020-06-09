@@ -5,15 +5,15 @@
 <style>
   table{
     outline: 10px solid rgb(252,252,252);
-    border: 2px solid rgb(62, 131, 196);
+    border: 2px solid rgb(18, 98, 173);
     border-collapse: collapse;
-    box-shadow: 0 0 0 20px rgb(62, 131, 196),
+    box-shadow: 0 0 0 20px rgb(18, 98, 173),
                 16px 24px 30px #888888;
     width: 100vw;
     margin: 5vw;
   }
   th, td {
-    border: 2px solid rgb(62, 131, 196);
+    border: 2px solid rgb(18, 98, 173);
     padding-top: 2vh;
     padding-bottom: 2vh;
     text-align: center;
@@ -34,10 +34,8 @@
 </style>
 
 <div class="container">
-    <h1 class="mt-5" style="text-align: center;">Let's Play</h1>
-    <div class="row">
-      <b>Your ID: {{card.name}}</b>
-    </div>
+    <h1 class="mt-5" style="text-align: center;">Let's Play!</h1>
+    <h4 class="mt-5" style="text-align: center;">Yell "{{card.name}}" to claim</h4>    
     <div class="row">
       <table>
         <tbody>
@@ -55,6 +53,7 @@
         </tbody>
       </table>
     </div>
+    <h6 class="mt-5" style="text-align: center;">Game {{card.game}}</h6>    
 </div>
 
 <script>
