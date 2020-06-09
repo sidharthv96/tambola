@@ -17,11 +17,11 @@ services:
       target: development
       args:
         <<: *build_args
-    image: "tambola-development"
+    image: 'tambola-development'
     ports:
-      - "5000:5000"
-      - "2992:2992"
-    depends_on: 
+      - '5000:5000'
+      - '2992:2992'
+    depends_on:
       - db
     <<: *default_volumes
 
@@ -31,15 +31,20 @@ services:
       target: production
       args:
         <<: *build_args
-    image: "tambola-production"
-    ports:
-      - "5000:5000"
+    image: 'tambola-production'
+    expose:
+      - 5000
+    labels:
+      - 'virtual.host=tambola.sidhart.dev' # your domains separated with a space
+      - 'virtual.port=5000' # exposed port of this container
+      - 'virtual.tls-email=tambola@sidhart.dev' # ssl is now on
+      - 'virtual.websockets' # enable websocket passthrough
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: 0
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
-    depends_on: 
+    depends_on:
       - db
     <<: *default_volumes
 
@@ -50,10 +55,10 @@ services:
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: 0
-    image: "tambola-manage"
+    image: 'tambola-manage'
     stdin_open: true
     tty: true
-    depends_on: 
+    depends_on:
       - db
     <<: *default_volumes
 
@@ -66,8 +71,24 @@ services:
       - POSTGRES_PASSWORD=tambola
       - POSTGRES_DB=tambola
 
+  caddy-gen:
+    container_name: caddy-gen
+    image: 'wemakeservices/caddy-gen:latest'
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro # needs socket to read events
+      - certs_acme:/etc/caddy/acme # to save acme
+      - certs_ocsp:/etc/caddy/ocsp # to save certificates
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - flask-prod
+
 volumes:
   postgres_data:
   node-modules:
   static-build:
   dev-db:
+  certs_acme:
+  certs_ocsp:
