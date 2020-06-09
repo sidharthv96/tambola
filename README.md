@@ -16,9 +16,9 @@ In case there are conflicts, the fist valid claim in the Moderator's chat window
 - **Early Five** : First one to get 5 numbers marked.
   ![Early Five](assets/img/earlyFive.png)
 - **Top, Middle & Bottom Rows** : Fisrt 3 people to complete all 5 numbers on these rows will get one prize each.
-  ![Top Row](assets/img/toprow.png)
-  ![Middle Row](assets/img/middlerow.png)
-  ![Bottom Row](assets/img/bottomrow.png)
+  ![Top Row](assets/img/topRow.png)
+  ![Middle Row](assets/img/middleRow.png)
+  ![Bottom Row](assets/img/bottomRow.png)
 
 - **Full House** : First one to mark all 15 numbers on their ticket.
-  ![Full House](assets/img/fullhouse.png)
+  ![Full House](assets/img/fullHouse.png)
