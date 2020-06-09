@@ -32,14 +32,21 @@ services:
       args:
         <<: *build_args
     image: "tambola-production"
-    ports:
-      - "5000:5000"
+    expose:
+     - 5000
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: 0
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
+      HTTP_PORT: 5000
+      VIRTUAL_HOST: tambola.sidhart.dev
+      LETSENCRYPT_HOST: tambola.sidhart.dev
+      LETSENCRYPT_EMAIL: "tambola@sidhart.dev"
+    networks:
+      service_network:
     depends_on: 
+      - nginx-proxy-letsencrypt
       - db
     <<: *default_volumes
 
@@ -66,7 +73,41 @@ services:
       - POSTGRES_PASSWORD=tambola
       - POSTGRES_DB=tambola
 
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    container_name: nginx-proxy
+    networks:
+      service_network:
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      NGINX_PROXY_CONTAINER: "nginx-proxy"
+    networks:
+      service_network:
+    depends_on: 
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+
+networks:
+  service_network:
+
 volumes:
+  nginx-certs:
+  nginx-vhost:
+  nginx-html:
   postgres_data:
   node-modules:
   static-build:
