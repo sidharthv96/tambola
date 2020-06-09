@@ -1,3 +1,10 @@
+
+(function() {
+  const curNum = document.getElementById('cur_num').innerHTML.padStart(2, '0');
+  odoo.default({ el:'.js-odoo', from: '00', to: curNum, animationDelay: 2000 });
+})();
+
+
 const winPatterns = [
   {
     name: 'Full House',
@@ -7,6 +14,14 @@ const winPatterns = [
   {
     name: 'Top Row',
     validator: (t) => !t.data[0].some((cell) => cell !== '-' && cell !== 'x'),
+  },
+  {
+    name: 'Middle Row',
+    validator: (t) => !t.data[1].some((cell) => cell !== '-' && cell !== 'x'),
+  },
+  {
+    name: 'Bottom Row',
+    validator: (t) => !t.data[2].some((cell) => cell !== '-' && cell !== 'x'),
   },
   {
     name: 'Early 5',
