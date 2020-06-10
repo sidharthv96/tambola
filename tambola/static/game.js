@@ -1,10 +1,3 @@
-
-(function() {
-  const curNum = document.getElementById('cur_num').innerHTML.padStart(2, '0');
-  odoo.default({ el:'.js-odoo', from: '00', to: curNum, animationDelay: 2000 });
-})();
-
-
 const winPatterns = [
   {
     name: 'Full House',
@@ -32,12 +25,12 @@ const winPatterns = [
 showWinners();
 
 async function nextNumber() {
-  await fetch("/games/random/");
+  await fetch('/games/random/');
   location.reload();
 }
 
 async function newGame() {
-  if (confirm("Start new game?")) {
+  if (confirm('Start new game?')) {
     await fetch('/games/new/');
     location.reload();
   }
@@ -100,3 +93,6 @@ function processTicket(ticket) {
   ticket.data = JSON.parse(ticket.data);
   return ticket;
 }
+
+const curNum = document.getElementById('cur_num').innerHTML.padStart(2, '0');
+odoo.default({ el: '.js-odoo', from: '00', to: curNum });
