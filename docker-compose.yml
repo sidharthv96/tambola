@@ -42,9 +42,9 @@ services:
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
       HTTP_PORT: 5000
-      VIRTUAL_HOST: tambola.sidhart.dev
-      LETSENCRYPT_HOST: tambola.sidhart.dev
-      LETSENCRYPT_EMAIL: 'tambola@sidhart.dev'
+      VIRTUAL_HOST: tambola.sidharth.dev
+      LETSENCRYPT_HOST: tambola.sidharth.dev
+      LETSENCRYPT_EMAIL: 'tambola@sidharth.dev'
     networks:
       service_network:
     depends_on:
