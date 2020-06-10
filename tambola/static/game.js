@@ -24,6 +24,12 @@ const winPatterns = [
     name: 'Early 5',
     validator: (t) => t.data.flat().filter((cell) => cell === 'x').length >= 5,
   },
+  {
+    name: 'Love at first sight',
+    validator: (t) =>
+      markedNums.length === 1 &&
+      t.data.flat().filter((cell) => cell === 'x').length === 1,
+  },
 ];
 
 showWinners();
@@ -50,9 +56,12 @@ function initSpinner(markedNums) {
 }
 
 async function showWinners() {
-  const tickets = await getTickets();
-  const markedNums = await getMarkedNums();
   initSpinner(markedNums);
+  const sortedNums = [...markedNums];
+  sortedNums.sort((a, b) => a - b);
+  document.getElementById('prev-nums').innerHTML = sortedNums.join(', ');
+
+  const tickets = await getTickets();
   const markedTickets = tickets.map((ticket) => markTicket(ticket, markedNums));
 
   const rootDiv = document.getElementById('win_patterns');

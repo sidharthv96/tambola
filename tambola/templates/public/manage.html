@@ -9,15 +9,17 @@
     <div class="js-odoo"></div>
     <button
       type="button"
-      class="btn btn-success btn-circle btn-xl"
+      class="btn btn-danger btn-circle btn-xl"
       onclick="nextNumber()"
     >
-      Spin
+      Spin!
     </button>
     <br />
     <br />
+    <div class="prev-nums">Previous: <span id="prev-nums"></span></div>
+    <br />
     <div class="prev-nums">
-      Previous: {{ ", ".join(game.numbers.split(",")[1:]) }}
+      Previous unsorted: {{ ", ".join(game.numbers.split(",")) }}
     </div>
   </div>
   <div class="col-md-4">
@@ -27,6 +29,9 @@
     </button>
   </div>
 </div>
+<script>
+  const markedNums = {{game.numbers.split(",")|safe}};
+</script>
 <script src="{{url_for('static', filename='odoo.js')}}"></script>
 <script src="{{url_for('static', filename='game.js')}}"></script>
 {% endblock %}
