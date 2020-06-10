@@ -62,6 +62,9 @@ async function showWinners() {
   document.getElementById('prev-nums').innerHTML = sortedNums.join(', ');
 
   const tickets = await getTickets();
+  try {
+    document.getElementById('tickets').innerHTML = `${tickets.length} tickets`;
+  } catch (e) {}
   const markedTickets = tickets.map((ticket) => markTicket(ticket, markedNums));
 
   const rootDiv = document.getElementById('win_patterns');
