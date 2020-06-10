@@ -33,14 +33,12 @@ services:
         <<: *build_args
     image: 'tambola-production'
     expose:
-      - 3000
+      - 5000
     labels:
       - 'virtual.host=tambola.sidhart.dev' # your domains separated with a space
       - 'virtual.port=5000' # exposed port of this container
       - 'virtual.tls-email=tambola@sidhart.dev' # ssl is now on
-      - 'virtual.websockets' # enable websocket passthrough
     environment:
-      PORT: 3000
       FLASK_ENV: production
       FLASK_DEBUG: 0
       LOG_LEVEL: info
