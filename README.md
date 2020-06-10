@@ -9,7 +9,7 @@ The Tambola masters will announce numbers between 1 and 90 on call and you can m
 
 Once you get any of the 5 winning combinations below, you should yell **the name on your ticket** (and put it in zoom chat) to claim that prize. If the claim is valid, you will get the prize money. **Otherwise your ticket will be cancelled!**
 
-In case there are conflicts, the fist valid claim in the Moderator's chat window will be selected.
+In case there are conflicts, the first valid claim in the Moderator's chat window will be selected.
 
 ## Winning Combinations
 
