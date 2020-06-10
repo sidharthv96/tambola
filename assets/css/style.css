@@ -84,3 +84,36 @@ footer .footer-nav {
   margin-right: 25px;
   list-style: none;
 }
+
+
+.btn-circle.btn-xl {
+  width: 3em;
+  height: 3em;
+  padding: 0.3em 0.3em;
+  font-size: 3em;
+  line-height: 1.33;
+  border-radius: 0.6em;
+  text-shadow: 2px 2px 7px #0000008f;
+  box-shadow: 5px 8px 11px 1px rgba(0, 0, 0, 0.6);
+  transition: 0.1s ease-in all; 
+}
+
+.btn-circle.btn-xl:hover {
+    transform: scale(1.1);
+}
+
+.js-odoo {
+  font-family: 'Inconsolata';
+  font-weight: bold;
+  font-size: 6em;
+  text-shadow: 1px 1px 5px rgba(1, 1, 1, 0.6);
+  fill: #111;
+  margin-left: 6%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .prev-nums {
+    font-size: large;
+ }
