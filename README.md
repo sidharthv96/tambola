@@ -2,7 +2,7 @@
 
 All of you should join Zoom to play the game.
 
-Go to link to get your ticket. Each ticket will have a name and 15 numbers.
+Open the [game portal](https://tambola.sidharth.dev/) to get your ticket. Each ticket will have a name and 15 numbers.
 ![Ticket](assets/img/ticket.png)
 
 The Tambola masters will announce numbers between 1 and 90 on call and you can mark them on your tickets.
