@@ -60,6 +60,7 @@ services:
     tty: true
     depends_on:
       - db
+      - caddy-gen
     <<: *default_volumes
 
   db:
@@ -82,8 +83,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-    depends_on:
-      - flask-prod
 
 volumes:
   postgres_data:
