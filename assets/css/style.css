@@ -20,18 +20,17 @@ textarea {
   resize: vertical;
 }
 
-.container-narrow{
+.container-narrow {
   margin: 0 auto;
   max-width: 700px;
 }
 
 /* Forms */
 
-.navbar-form input[type="text"],
-.navbar-form input[type="password"] {
+.navbar-form input[type='text'],
+.navbar-form input[type='password'] {
   width: 180px;
 }
-
 
 .form-register {
   width: 50%;
@@ -43,8 +42,8 @@ textarea {
   height: auto;
   padding: 10px;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* footer */
@@ -85,7 +84,6 @@ footer .footer-nav {
   list-style: none;
 }
 
-
 .btn-circle.btn-xl {
   width: 3em;
   height: 3em;
@@ -93,13 +91,13 @@ footer .footer-nav {
   font-size: 3em;
   line-height: 1.33;
   border-radius: 0.6em;
-  text-shadow: 2px 2px 7px #0000008f;
+  /* text-shadow: 2px 2px 7px #0000008f; */
   box-shadow: 5px 8px 11px 1px rgba(0, 0, 0, 0.6);
-  transition: 0.1s ease-in all; 
+  transition: 0.1s ease-in all;
 }
 
 .btn-circle.btn-xl:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .js-odoo {
@@ -112,8 +110,8 @@ footer .footer-nav {
   display: block;
   justify-content: center;
   align-items: center;
- }
+}
 
- .prev-nums {
-    font-size: large;
- }
+.prev-nums {
+  font-size: large;
+}
