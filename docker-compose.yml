@@ -11,17 +11,30 @@ x-default-volumes: &default_volumes
     - ./dev.db:/tmp/db
 
 services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CADDY_DOCKER_PROXY_SERVICE_TASKS=true
+      - CADDY_DOCKER_PROCESS_CADDYFILE=true
+    labels: # Global options
+      caddy.email: tambola@sidharth.dev
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   flask-dev:
     build:
       context: .
       target: development
       args:
         <<: *build_args
-    image: "tambola-development"
+    image: 'tambola-development'
     ports:
-      - "5000:5000"
-      - "2992:2992"
-    depends_on: 
+      - '5000:5000'
+      - '2992:2992'
+    depends_on:
       - db
     <<: *default_volumes
 
@@ -31,16 +44,21 @@ services:
       target: production
       args:
         <<: *build_args
-    image: "tambola-production"
+    image: 'tambola-production'
     ports:
-      - "5000:5000"
+      - '5000:5000'
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: 0
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
-    depends_on: 
+    labels:
+      - caddy: tambola.sidharth.dev
+      - caddy.reverse_proxy: '{{upstreams 5000}}'
+      - caddy.tls: 'internal'
+    depends_on:
       - db
+      - caddy
     <<: *default_volumes
 
   manage:
@@ -50,10 +68,10 @@ services:
     environment:
       FLASK_ENV: production
       FLASK_DEBUG: 0
-    image: "tambola-manage"
+    image: 'tambola-manage'
     stdin_open: true
     tty: true
-    depends_on: 
+    depends_on:
       - db
     <<: *default_volumes
 
