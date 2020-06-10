@@ -45,6 +45,7 @@ services:
       LOG_LEVEL: info
       GUNICORN_WORKERS: 4
     depends_on:
+      - caddy-gen
       - db
     <<: *default_volumes
 
@@ -60,7 +61,6 @@ services:
     tty: true
     depends_on:
       - db
-      - caddy-gen
     <<: *default_volumes
 
   db:
