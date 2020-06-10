@@ -1,32 +1,32 @@
-
-
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="row">
-	<br>
-	<br>
-	<br>
-	<div class="col-md-8" align="center">
-		<h1>Game {{game.id}}</h1>
-		<br>
-		<div class="js-odoo"></div>
-		<button type="button" class="btn btn-success btn-circle btn-xl" onclick="nextNumber()">Spin</button>
-		<div style="display: none" id="cur_num">{{game.numbers.split(",")[0]}}</div>
-		<br>
-		<br>
-		<br>
-		<div class="prev-nums">
-			Previous: {{
-				",".join(game.numbers.split(",")[1:])
-			}}
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div id="win_patterns"></div>
-		<button type="button" class="btn btn-primary" onclick="newGame()">New Game</button>
-	</div>
+  <br />
+  <br />
+  <br />
+  <div class="col-md-8" align="center">
+    <h1>Game {{game.id}}</h1>
+    <br />
+    <div class="js-odoo"></div>
+    <button
+      type="button"
+      class="btn btn-success btn-circle btn-xl"
+      onclick="nextNumber()"
+    >
+      Spin
+    </button>
+    <br />
+    <br />
+    <div class="prev-nums">
+      Previous: {{ ", ".join(game.numbers.split(",")[1:]) }}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div id="win_patterns"></div>
+    <button type="button" class="btn btn-primary" onclick="newGame()">
+      New Game
+    </button>
+  </div>
 </div>
 <script src="{{url_for('static', filename='odoo.js')}}"></script>
 <script src="{{url_for('static', filename='game.js')}}"></script>
 {% endblock %}
-

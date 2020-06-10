@@ -1,3 +1,7 @@
+function rowValidator(row) {
+  return (t) => !t.data[row].some((cell) => cell !== '-' && cell !== 'x');
+}
+
 const winPatterns = [
   {
     name: 'Full House',
@@ -6,15 +10,15 @@ const winPatterns = [
   },
   {
     name: 'Top Row',
-    validator: (t) => !t.data[0].some((cell) => cell !== '-' && cell !== 'x'),
+    validator: rowValidator(0),
   },
   {
     name: 'Middle Row',
-    validator: (t) => !t.data[1].some((cell) => cell !== '-' && cell !== 'x'),
+    validator: rowValidator(1),
   },
   {
     name: 'Bottom Row',
-    validator: (t) => !t.data[2].some((cell) => cell !== '-' && cell !== 'x'),
+    validator: rowValidator(2),
   },
   {
     name: 'Early 5',
@@ -35,9 +39,20 @@ async function newGame() {
     location.reload();
   }
 }
+
+function initSpinner(markedNums) {
+  let to, from;
+  if (markedNums.length > 0) {
+    to = markedNums[0].padStart(2, '0');
+    from = (markedNums[1] || '00').padStart(2, '0');
+  }
+  odoo.default({ el: '.js-odoo', from, to });
+}
+
 async function showWinners() {
   const tickets = await getTickets();
   const markedNums = await getMarkedNums();
+  initSpinner(markedNums);
   const markedTickets = tickets.map((ticket) => markTicket(ticket, markedNums));
 
   const rootDiv = document.getElementById('win_patterns');
@@ -93,6 +108,3 @@ function processTicket(ticket) {
   ticket.data = JSON.parse(ticket.data);
   return ticket;
 }
-
-const curNum = document.getElementById('cur_num').innerHTML.padStart(2, '0');
-odoo.default({ el: '.js-odoo', from: '00', to: curNum });
