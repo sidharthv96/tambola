@@ -86,7 +86,7 @@ footer .footer-nav {
 
 .btn-circle.btn-xl {
   width: 3em;
-  height: 3em;
+  /* height: 3em; */
   padding: 0.3em 0.3em;
   font-size: 3em;
   line-height: 1.33;
@@ -101,9 +101,9 @@ footer .footer-nav {
 }
 
 .js-odoo {
-  font-family: 'Inconsolata';
+  /* font-family: 'Arial'; */
   font-weight: bold;
-  font-size: 6em;
+  font-size: 15em;
   text-shadow: 1px 1px 5px rgba(1, 1, 1, 0.6);
   fill: #111;
   margin-left: 6%;

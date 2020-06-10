@@ -16,11 +16,13 @@
     </button>
     <br />
     <br />
-    <div class="prev-nums">Previous: <span id="prev-nums"></span></div>
-    <br />
     <div class="prev-nums">
-      Previous unsorted: {{ ", ".join(game.numbers.split(",")) }}
+      <div class="prev-nums">
+        Previous 5 Nums: <span id="prev-nums-unsorted"></span>
+      </div>
     </div>
+    <br />
+    <div class="prev-nums">Previous: <span id="prev-nums"></span></div>
   </div>
   <div class="col-md-4">
     <div id="win_patterns"></div>

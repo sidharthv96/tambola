@@ -58,13 +58,15 @@ function initSpinner(markedNums) {
 async function showWinners() {
   initSpinner(markedNums);
   const sortedNums = [...markedNums];
+  sortedNums.shift();
+  document.getElementById('prev-nums-unsorted').innerHTML = sortedNums
+    .slice(0, 5)
+    .join(', ');
   sortedNums.sort((a, b) => a - b);
   document.getElementById('prev-nums').innerHTML = sortedNums.join(', ');
 
   const tickets = await getTickets();
-  try {
-    document.getElementById('tickets').innerHTML = `${tickets.length} tickets`;
-  } catch (e) {}
+  document.getElementById('tickets').innerHTML = `${tickets.length} tickets`;
   const markedTickets = tickets.map((ticket) => markTicket(ticket, markedNums));
 
   const rootDiv = document.getElementById('win_patterns');
