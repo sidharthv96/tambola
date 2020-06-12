@@ -25,7 +25,7 @@ def manage():
 
 @blueprint.route("/spin/")
 @login_required
-def manage():
+def spin():
     return render_template("public/spin.html", game=get_game())
 
 possible = set(map(str,range(1, 91)))
