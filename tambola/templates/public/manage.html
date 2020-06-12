@@ -1,10 +1,10 @@
 {% extends "layout.html" %} {% block content %}
-<div class="row">
-  <br />
-  <br />
-  <br />
-  <div class="col-md-8" align="center">
-    <h1>Game {{game.id}}</h1>
+<div class="container-fluid">
+  <div  align="center">
+    <h1>Game {{game.id}} - <span id="tickets"></span></h1>
+    <button type="button" class="btn btn-primary" onclick="newGame()">
+      New Game
+    </button>
     <div class="prev-nums">
       <div class="prev-nums">
         Previous 5 Nums: <span id="prev-nums-unsorted"></span>
@@ -13,18 +13,13 @@
     <br />
     <div class="prev-nums">Previous: <span id="prev-nums"></span></div>
   </div>
-  <div class="col-md-4">
-    <div id="win_patterns"></div>
-    <br />
-    <div id="tickets"></div>
-    <button type="button" class="btn btn-primary" onclick="newGame()">
-      New Game
-    </button>
+  <div class="row">
+    <div id="win_patterns" class="row"></div>
   </div>
 </div>
 <script>
   const markedNums = {{game.numbers.split(",")|safe}};
-  setTimeout(() => location.reload(), 2000);
+  setTimeout(() => location.reload(), 5000);
 </script>
 <script src="{{url_for('static', filename='game.js')}}"></script>
 {% endblock %}

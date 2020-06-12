@@ -52,7 +52,11 @@ function initSpinner(markedNums) {
     to = markedNums[0].padStart(2, '0');
     from = (markedNums[1] || '00').padStart(2, '0');
   }
-  odoo.default({ el: '.js-odoo', from, to });
+  try { 
+    odoo.default({ el: '.js-odoo', from, to });
+  } catch (e) {
+
+  }
 }
 
 async function showWinners() {
@@ -70,19 +74,21 @@ async function showWinners() {
   const markedTickets = tickets.map((ticket) => markTicket(ticket, markedNums));
 
   const rootDiv = document.getElementById('win_patterns');
+  if (rootDiv) {
   rootDiv.innerHTML = '';
-  winPatterns.forEach((pattern) => {
-    rootDiv.innerHTML += `
-    <div>
+    winPatterns.forEach((pattern) => {
+      rootDiv.innerHTML += `
+    <div class="col-md-2">
       <h3>${pattern.name}</h3>
       <ul>
       ${markedTickets
-        .filter(pattern.validator)
-        .map((winningPattern) => `<li>${winningPattern.name}</li>`)
-        .join('')}
+          .filter(pattern.validator)
+          .map((winningPattern) => `<li>${winningPattern.name}</li>`)
+          .join('')}
       </ul>
     </div>`;
-  });
+    });
+  }
 }
 
 function markTicket(ticket, markedNums) {

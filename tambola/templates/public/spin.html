@@ -1,5 +1,6 @@
 {% extends "layout.html" %} {% block content %}
-<div class="row">
+<div class="container">
+  <div class="row">
   <br />
   <br />
   <br />
@@ -24,6 +25,7 @@
     <br />
     <div class="prev-nums">Previous: <span id="prev-nums"></span></div>
   </div>
+</div>
 </div>
 <script>
   const markedNums = {{game.numbers.split(",")|safe}};
