@@ -21,7 +21,8 @@ def game():
 @blueprint.route("/manage/")
 @login_required
 def manage():
-    return render_template("public/manage.html", game=get_game())
+    win = request.args.get('win') == "1"
+    return render_template("public/manage.html" if win else "public/spin.html", game=get_game())
 
 possible = set(map(str,range(1, 91)))
 
